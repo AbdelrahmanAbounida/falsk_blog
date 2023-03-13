@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="row my-5" style="height:100px d-flex">
+   <div class="text-center">
+    <button class="btn btn-outline-primary play px-5">Play</button>
+    <button class="btn btn-secondary restart px-5">StartGame</button>
+
+   </div> 
+</div>
+<script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+
+{% endblock content %}
