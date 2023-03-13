@@ -1,0 +1,10 @@
+### Flask WTF
+pip install -U Flask-WTF
+
+## flask login
+pip install flask-login
+
+## flask bcrypt
+ pip install flask-bcrypt
+
+ 

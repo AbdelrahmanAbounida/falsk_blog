@@ -1,6 +1,8 @@
 from . import main 
-from flask import render_template,request, flash
+from flask import render_template,redirect, flash
 from app.extensions import mongo_db
+from .forms import RegisterForm
+
 
 @main.route('/')
 def index():
@@ -15,4 +17,6 @@ def about():
 @main.route('/game')
 def game():
     return render_template('game.html')
+
+
 

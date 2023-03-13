@@ -1,0 +1,49 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<main class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="my-5">
+                    <form id="contactForm" data-sb-form-api-token="API_TOKEN" method="POST" action="" novalidate>
+                        {{ form.hidden_tag() }}
+                        {{ form.csrf_token }}
+
+      
+                        <div class="form-floating">
+                            <!-- <input class="form-control" id="email" type="email" placeholder="Enter your email..." data-sb-validations="required,email" /> -->
+                            {{form.email(class="form-control",placeholder="Email")}}
+                            <!-- {{form.email}} -->
+                            <label for="email">{{form.email.label}}</label>
+                            {% for error in form.errors['email'] %}
+                                <div class="text-danger" style="font-size: 17px;">{{error}}</div>
+                            {% endfor %}
+                        </div>
+        
+                        <div class="form-floating">
+                            <!-- <input class="form-control" id="phone" type="tel" placeholder="Enter your phone number..." data-sb-validations="required" /> -->
+                            {{form.password(class='form-control',placeholder='Phone')}}
+                            <!-- {{form.phoneNumber}} -->
+                            <label for="phone">{{form.password.label}}</label>
+                            {% for error in form.errors['password'] %}
+                                <div class="text-danger" style="font-size: 17px;">{{error}}</div>
+                            {% endfor %}
+                        </div>
+  
+                        <br />
+                        <button class="btn btn-primary text-uppercase " id="submitButton" type="submit">Login</button>
+                    </form>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+{% endblock content %}

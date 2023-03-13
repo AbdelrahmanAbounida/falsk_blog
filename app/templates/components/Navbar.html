@@ -14,11 +14,13 @@
           <li class="nav-item"><a class="nav-link px-lg-3  py-lg-3 text-white"  href="{{ url_for('main.index') }}">Home</a></li>
           <li class="nav-item"> <a class="nav-link px-lg-3  py-lg-3 text-white" href="{{url_for('main.about')}}">Posts</a></li>
           <li class="nav-item"><a class="nav-link px-lg-3  py-lg-3 text-white" href="{{ url_for('main.game') }}">Profile</a></li>
-          <li class="nav-item"><a class="nav-link px-lg-3  py-lg-3 text-white" href="{{ url_for('main.game') }}">Contact</a></li>
+          <li class="nav-item"><a class="nav-link px-lg-3  py-lg-3 text-white" href="{{ url_for('accounts.register') }}">Contact</a></li>
         </ul>
         <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button type="button" class="btn btn-primary">Logout</button>
+            <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button type="button" class="btn btn-primary">Logout</button> -->
+            <a href="{{ url_for('accounts.login') }}" type="button" class="btn btn-outline-primary mx-3 px-4" >Login</a>
+            <a href="{{ url_for('accounts.register') }}" type="button" class="btn btn-primary">Register</a>
           </form>
       </div>
     </div>

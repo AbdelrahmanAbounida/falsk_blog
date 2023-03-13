@@ -1,6 +1,7 @@
 # from flask_pymongo import PyMongo
 from pymongo import MongoClient
 from flask_login import LoginManager
+from flask_bcrypt import Bcrypt
 
 ##################
 ## Database
@@ -18,3 +19,5 @@ if not collection_name in mongo_db.list_collection_names():
 ## Authentication
 ##################  
 login_manager = LoginManager()
+custom_bcrypt = Bcrypt()
+
