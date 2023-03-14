@@ -19,4 +19,18 @@ def game():
     return render_template('game.html')
 
 
+@main.route('/all_posts')
+def allPosts():
+    return render_template('allPosts.html')
 
+@main.route('/my_posts')
+def myPosts():
+    return render_template('myPosts.html')
+
+@main.route('/all_videos')
+def allVideos():
+    return render_template('allVideos.html')
+
+@main.route('/my_videos')
+def myVideos():
+    return render_template('myVideos.html')

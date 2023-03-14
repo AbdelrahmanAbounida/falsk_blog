@@ -15,6 +15,10 @@ def create_app(config_name="default"):
 
     # 2- extensions (db,login,..)
     login_manager.init_app(app)
+    login_manager.login_view = "accounts.login"
+    login_manager.login_message = "Please log in first to access the blog"
+    login_manager.login_message_category = "warning"
+    
     custom_bcrypt.init_app(app)
     # mongo.init_app(app)
 

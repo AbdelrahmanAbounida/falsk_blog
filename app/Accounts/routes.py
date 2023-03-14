@@ -2,11 +2,15 @@ from flask import render_template, redirect, request,flash
 from .forms import RegisterForm, LoginForm
 from . import accounts
 from app.extensions import mongo_db,custom_bcrypt, login_manager
-from flask_login import current_user, login_required, login_user
+from flask_login import current_user, login_required, login_user, logout_user
+from .models import User
+import json
+from bson.objectid import ObjectId
 
 @login_manager.user_loader
 def load_user(user_id):
-    return mongo_db.find_one({'id':user_id})
+    user = mongo_db['blog_collection'].find_one({'_id':ObjectId(user_id)})
+    return User(user['_id'], user['email'], user['password'])
 
 @accounts.route('/register',methods=['GET','POST'])
 def register():
@@ -35,14 +39,25 @@ def login():
     form = LoginForm()
     if request.method == "POST":
         if form.validate_on_submit():
-            user = mongo_db['blog_collection'].find_one({'emial':form.email.data})
-
+            user = mongo_db['blog_collection'].find_one({'email':form.email.data})
             if user and custom_bcrypt.check_password_hash(user['password'],form.password.data):
+                # print(str(user['_id']))
+                user = User(str(user['_id']), user['email'], user['password'])
+
+                print(user.id)
+                print(mongo_db['blog_collection'].find_one({'_id':ObjectId(user.id)}))
                 login_user(user)
+                # print(current_user.is_authenticated())
                 return redirect('/')
             else:
-                flash('Login unsuccessful. Please check your email or password', 'warning')
+                flash('Login unsuccessful. Please check your email or password', 'danger')
         else:
             print("Noo")
     return render_template('auth/login.html',form=form)
 
+
+@accounts.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect('/')

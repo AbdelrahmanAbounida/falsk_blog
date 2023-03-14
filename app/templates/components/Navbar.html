@@ -12,15 +12,65 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item"><a class="nav-link px-lg-3  py-lg-3 text-white"  href="{{ url_for('main.index') }}">Home</a></li>
-          <li class="nav-item"> <a class="nav-link px-lg-3  py-lg-3 text-white" href="{{url_for('main.about')}}">Posts</a></li>
+          <!-- Posts -->
+          {% if current_user.is_authenticated %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white px-lg-3  py-lg-3" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Posts
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">My Posts</a></li>
+              <li><a class="dropdown-item" href="#">All Posts</a></li>
+            </ul>
+          </li>
+          {% else %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white px-lg-3  py-lg-3" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Posts
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">All Posts</a></li>
+            </ul>
+          </li>
+            {% endif %}
+
+
+          {% if current_user.is_authenticated %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white px-lg-3  py-lg-3" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Videos
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">My Videos</a></li>
+              <li><a class="dropdown-item" href="#">All Videos</a></li>
+            </ul>
+          </li>
+          {% else %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white px-lg-3  py-lg-3" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Videos
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">All Videos</a></li>
+            </ul>
+          </li>
+            {% endif %}
+
           <li class="nav-item"><a class="nav-link px-lg-3  py-lg-3 text-white" href="{{ url_for('main.game') }}">Profile</a></li>
           <li class="nav-item"><a class="nav-link px-lg-3  py-lg-3 text-white" href="{{ url_for('accounts.register') }}">Contact</a></li>
         </ul>
         <form class="d-flex">
-            <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button type="button" class="btn btn-primary">Logout</button> -->
+
+          {% if current_user.is_authenticated %}
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <a href="{{ url_for('accounts.logout') }}" type="button" class="btn btn-primary">Logout</a>
+          
+          {% else %}
             <a href="{{ url_for('accounts.login') }}" type="button" class="btn btn-outline-primary mx-3 px-4" >Login</a>
             <a href="{{ url_for('accounts.register') }}" type="button" class="btn btn-primary">Register</a>
+          {% endif %}
+            
+            
           </form>
       </div>
     </div>
