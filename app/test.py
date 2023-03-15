@@ -1,14 +1,19 @@
-from pymongo import MongoClient
+# from pymongo import MongoClient
 
-uri = 'mongodb+srv://aboneda:aboneda@cluster0.psahi.mongodb.net/?retryWrites=true&w=majority'
+# uri = 'mongodb+srv://aboneda:aboneda@cluster0.psahi.mongodb.net/?retryWrites=true&w=majority'
 
-client = MongoClient(uri)
-db = client['blogdb']
+# client = MongoClient(uri)
+# db = client['blogdb']
 
-# db.test_collection.insert({'some_key': 'some_value'})
-# db.create_collection('blog_collection')
+# # db.test_collection.insert({'some_key': 'some_value'})
+# # db.create_collection('blog_collection')
 
-if 'blog_collection' in db.list_collection_names():
-    print('The collection exists.')
-else:
-    print('The collection does not exist.')
+# if 'blog_collection' in db.list_collection_names():
+#     print('The collection exists.')
+# else:
+#     print('The collection does not exist.')
+
+
+import os
+from pathlib import Path
+print(Path(__file__).resolve().parent.parent)

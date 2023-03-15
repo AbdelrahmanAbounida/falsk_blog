@@ -1,8 +1,11 @@
 from . import main 
-from flask import render_template,redirect, flash
+from flask import render_template,redirect, flash,request,current_app
 from app.extensions import mongo_db
 from .forms import PostForm
 from flask_login import login_required
+import os 
+from werkzeug.utils import secure_filename
+from pathlib import Path
 
 @main.route('/')
 def index():
@@ -42,9 +45,28 @@ def myVideos():
     return render_template('myVideos.html')
 
 
+########################
+# add article background
+########################
 
-@main.route('/create_post')
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in current_app.config['BACKGROUND_ALLOWED_EXTENSIONS']
+
+
+@main.route('/create_post',methods=['GET','POST'])
 @login_required
 def addPost():
     form = PostForm()
+
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            file = form.background.data
+            filename = file.filename
+            if file and allowed_file(file.filename):
+                file_name = secure_filename(file.filename)
+                file.save(os.path.join(Path(__file__).resolve().parent.parent,current_app.config['UPLOAD_FOLDER'],file.filename))
+        else:
+            print("Form not valid")
+
     return render_template('addPost.html',form=form)

@@ -10,40 +10,60 @@
                 <div class="my-5">
 
 
-                    <form id="contactForm" data-sb-form-api-token="API_TOKEN" method="POST" action="" novalidate>
+                    <form  method="POST" action=""  enctype="multipart/form-data" novalidate>
                         {{ form.hidden_tag() }}
                         {{ form.csrf_token }}
 
 
-
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label  fs-5 fw-bold">Title</label>
-                            <input type="email" class="form-control border border-primary border-1 rounded" id="Title" placeholder="Title">
+                            {{form.title(class="form-control border border-primary border-1 rounded",placeholder="Title")}}
+
+                            {% for error in form.errors['title'] %}
+                                <div class="text-danger" style="font-size: 17px;">{{error}}</div>
+                            {% endfor %}
+
                         </div>
 
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label  fs-5 fw-bold mt-3">Content</label>
-                            <textarea class="form-control border border-primary border-1 rounded" id="content" placeholder="Content" rows="3"></textarea>
+                            {{form.content(class="form-control border border-primary border-1 rounded",placeholder="Content")}}
+
+                            {% for error in form.errors['content'] %}
+                                <div class="text-danger" style="font-size: 17px;">{{error}}</div>
+                            {% endfor %}
                         </div>
 
 
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label  fs-5 fw-bold">Category</label>
-                            <select class="form-select btn btn-primary" aria-label="Default select example">
-                                <option selected>Choose Category</option>
-                                    {% for choice in form.category.choices %}
-                                        <option value={{choice[1]}}>{{choice[0]}}</option>
-                                    {% endfor %}
-                              </select>
+                            {{form.category(class="form-select btn border border-primary border-1")}}
+
+                            {% for error in form.errors['category'] %}
+                                <div class="text-danger" style="font-size: 17px;">{{error}}</div>
+                            {% endfor %}
+
                         </div>
 
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label  fs-5 fw-bold mt-3"> Background</label>
-                            <textarea class="form-control border border-primary border-1 rounded" id="content" placeholder="Content" rows="3"></textarea>
+                            <div class="mb-3 ">
+                                {{ form.background(class="form-control",type="file") }}
+                            </div>
+
+                            {% for error in form.errors['background'] %}
+                                <div class="text-danger" style="font-size: 17px;">{{error}}</div>
+                            {% endfor %}
+
                         </div>
 
-                          
-                      
+                          <div class="d-flex justify-content-center">
+                            <button class="btn btn-primary py-2 fs-4" type="submit">Create Article</button>
+                          </div>
+
+
+                    
+
                     </form>
 
 

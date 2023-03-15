@@ -3,6 +3,10 @@ class Config:
     SECRET_KEY = "e09c4d4df3c64b9b4ec5ee6089e28142"
     MONGO_URI = "mongodb+srv://aboneda:aboneda@cluster0.psahi.mongodb.net/?retryWrites=true&w=majority" #os.environ.get('MONGO_URI')
 
+    # file upload
+    UPLOAD_FOLDER = 'static/backgrounds'
+    BACKGROUND_ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+
     @staticmethod
     def init_app(app):
         pass
