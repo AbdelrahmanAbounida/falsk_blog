@@ -1,0 +1,57 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<main class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <p class="fs-3 fw-bold">Create New Post</p>
+                <div class="my-5">
+
+
+                    <form id="contactForm" data-sb-form-api-token="API_TOKEN" method="POST" action="" novalidate>
+                        {{ form.hidden_tag() }}
+                        {{ form.csrf_token }}
+
+
+
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label  fs-5 fw-bold">Title</label>
+                            <input type="email" class="form-control border border-primary border-1 rounded" id="Title" placeholder="Title">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label  fs-5 fw-bold mt-3">Content</label>
+                            <textarea class="form-control border border-primary border-1 rounded" id="content" placeholder="Content" rows="3"></textarea>
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label  fs-5 fw-bold">Category</label>
+                            <select class="form-select btn btn-primary" aria-label="Default select example">
+                                <option selected>Choose Category</option>
+                                    {% for choice in form.category.choices %}
+                                        <option value={{choice[1]}}>{{choice[0]}}</option>
+                                    {% endfor %}
+                              </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label  fs-5 fw-bold mt-3"> Background</label>
+                            <textarea class="form-control border border-primary border-1 rounded" id="content" placeholder="Content" rows="3"></textarea>
+                        </div>
+
+                          
+                      
+                    </form>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

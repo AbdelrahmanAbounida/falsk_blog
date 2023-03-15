@@ -1,24 +1,13 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,EmailField,PasswordField,IntegerField,TextAreaField,SubmitField
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from app.extensions import mongo_db
+from wtforms import StringField, TextAreaField, FileField, SelectField
+from wtforms.validators import DataRequired
 
-class RegisterForm(FlaskForm):
-    username = StringField('Username')
-    phoneNumber = IntegerField('phone')
-    email = EmailField('Email',validators=[DataRequired(),Email("Please enter a correct email address")])
-    password = PasswordField('Password',validators=[DataRequired(),Length(min=4,message="Password length shouldn't be less than 4")])
-    confirm_password = PasswordField('Confirm password',validators=[DataRequired(),EqualTo("password")])
-    submit = SubmitField('Register')
+# (value,displayedOption)
+blog_categories = [('Food','Food'),('Travel','Travel'),('Lifestyle','Lifestyle'),('Science','Science')]
 
-    # def validate_email(self,email):
-    #     user = mongo_db.blog_collection.find({ "email": email})
-    #     if user:
-    #         raise ValidationError("Opss!! a user with same email already exists.") 
-
-
-class LoginForm(FlaskForm):
-    email = EmailField('Email',validators=[DataRequired(),Email("Please enter a correct email address")])
-    password = PasswordField('password',validators=[DataRequired()])
-    submit = SubmitField('Login')
-
+class PostForm(FlaskForm):
+    title = StringField('title',validators=[DataRequired()])
+    content = TextAreaField('content',validators=[DataRequired()])
+    background = FileField('background',validators=[DataRequired()])
+    category = SelectField('category',choices=blog_categories,validators=[DataRequired()])
+     

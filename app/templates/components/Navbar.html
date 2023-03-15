@@ -19,8 +19,8 @@
               Posts
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">My Posts</a></li>
-              <li><a class="dropdown-item" href="#">All Posts</a></li>
+              <li><a class="dropdown-item" href="{{url_for('main.myPosts')}}">My Posts</a></li>
+              <li><a class="dropdown-item" href="{{url_for('main.allPosts')}}">All Posts</a></li>
             </ul>
           </li>
           {% else %}
@@ -29,7 +29,7 @@
               Posts
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">All Posts</a></li>
+              <li><a class="dropdown-item" href="{{url_for('main.allPosts')}}">All Posts</a></li>
             </ul>
           </li>
             {% endif %}
@@ -41,8 +41,8 @@
               Videos
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">My Videos</a></li>
-              <li><a class="dropdown-item" href="#">All Videos</a></li>
+              <li><a class="dropdown-item" href="{{url_for('main.myVideos')}}">My Videos</a></li>
+              <li><a class="dropdown-item" href="{{url_for('main.allVideos')}}">All Videos</a></li>
             </ul>
           </li>
           {% else %}
@@ -51,12 +51,14 @@
               Videos
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">All Videos</a></li>
+              <li><a class="dropdown-item" href="{{url_for('main.allVideos')}}">All Videos</a></li>
             </ul>
           </li>
             {% endif %}
 
-          <li class="nav-item"><a class="nav-link px-lg-3  py-lg-3 text-white" href="{{ url_for('main.game') }}">Profile</a></li>
+          {% if current_user.is_authenticated %}
+            <li class="nav-item"><a class="nav-link px-lg-3  py-lg-3 text-white" href="{{ url_for('main.game') }}">Profile</a></li>
+          {% endif %}
           <li class="nav-item"><a class="nav-link px-lg-3  py-lg-3 text-white" href="{{ url_for('accounts.register') }}">Contact</a></li>
         </ul>
         <form class="d-flex">
