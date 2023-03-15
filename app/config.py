@@ -5,7 +5,7 @@ class Config:
 
     # file upload
     UPLOAD_FOLDER = 'static/backgrounds'
-    BACKGROUND_ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+    BACKGROUND_ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'zip'}
 
     @staticmethod
     def init_app(app):

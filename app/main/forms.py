@@ -9,8 +9,7 @@ def AllowedFileValidator(form,field):
     if not ('.' in field.data.filename and 
         field.data.filename.rsplit('.', 1)[1].lower() in current_app.config['BACKGROUND_ALLOWED_EXTENSIONS']):
         raise ValidationError(f"Allowd file types are: [ {', '.join(current_app.config['BACKGROUND_ALLOWED_EXTENSIONS'])} ] only")
-    else:
-        print("Noooooooooooo")
+    
 
 
 # (value,displayedOption)

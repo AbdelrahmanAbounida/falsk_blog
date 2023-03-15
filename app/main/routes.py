@@ -1,5 +1,5 @@
 from . import main 
-from flask import render_template,redirect, flash,request,current_app
+from flask import render_template,redirect, flash,request,current_app, send_from_directory
 from app.extensions import mongo_db
 from .forms import PostForm
 from flask_login import login_required
@@ -7,7 +7,7 @@ import os
 from werkzeug.utils import secure_filename
 from pathlib import Path
 
-@main.route('/')
+@main.route('/',methods=['GET','POST'])
 def index():
     return render_template('index.html')
 
@@ -46,13 +46,8 @@ def myVideos():
 
 
 ########################
-# add article background
+# File Handling
 ########################
-
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in current_app.config['BACKGROUND_ALLOWED_EXTENSIONS']
-
 
 @main.route('/create_post',methods=['GET','POST'])
 @login_required
@@ -63,10 +58,18 @@ def addPost():
         if form.validate_on_submit():
             file = form.background.data
             filename = file.filename
-            if file and allowed_file(file.filename):
+            if file :
                 file_name = secure_filename(file.filename)
                 file.save(os.path.join(Path(__file__).resolve().parent.parent,current_app.config['UPLOAD_FOLDER'],file.filename))
+            else:
+                print("There is no file")
         else:
             print("Form not valid")
 
     return render_template('addPost.html',form=form)
+
+
+
+@main.route('/download/<filename>')
+def download(filename):
+    return send_from_directory(os.path.join(Path(__file__).resolve().parent.parent,current_app.config['UPLOAD_FOLDER']), filename)
